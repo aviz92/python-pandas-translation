@@ -11,7 +11,7 @@ class PandasRows:
 
     def get_rows(self, df: pd.DataFrame, start: int = 0, end: Optional[int] = None) -> pd.DataFrame:
         """ Get rows from a DataFrame."""
-        return df.iloc[start:end]
+        return df.iloc[start:end+1]
 
     def drop_rows(self, df: pd.DataFrame, index: Union[int, list[int]]) -> pd.DataFrame:
         """ Drop rows from a DataFrame."""

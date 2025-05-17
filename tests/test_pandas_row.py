@@ -25,11 +25,11 @@ def pandas_rows():
 class TestPandasRows:
     def test_get_rows(self, sample_df, pandas_rows):
         """Test getting rows from a DataFrame."""
-        result = pandas_rows.get_rows(sample_df, start=1, end=3)
+        result = pandas_rows.get_rows(sample_df, start=0, end=1)
         expected_df = pd.DataFrame(
             {
-                'name': ['Bob', 'Charlie'],
-                'age': [25, 35]
+                'name': ['Alice', 'Bob'],
+                'age': [30, 25]
             }
         )
 
