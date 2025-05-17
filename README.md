@@ -12,16 +12,6 @@ pip install pytho-pandas-translation
 
 ---
 
-## Configuration
-The package uses environment variables for authentication and configuration:
-
-```bash
-# Required environment variables
-JIRA_USER_NAME=your_jira_username
-JIRA_TOKEN=your_jira_api_token
-JIRA_BASE_URL=your-instance.atlassian.net  # Only used if base_url is not provided to constructor
-```
-
 ## Examples
 
 ### Creating an Issue with Custom Fields
