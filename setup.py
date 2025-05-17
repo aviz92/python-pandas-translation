@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-package_version = '1.0.0'
+package_version = '1.0.1'
 
 package_name = 'python-pandas-translation'
 package_description = 'A Pandas DataFrame translation library'
