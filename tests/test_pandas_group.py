@@ -58,3 +58,74 @@ class TestPandasGroup:
         )
 
         assert_frame_equal(result, expected)
+
+
+class TestGroupMean:
+    def test_group_mean(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [1, 2, 3]})
+        result = PandasGroup.group_mean(df, by=['a'])
+        assert result.loc['x', 'b'] == 1.5
+        assert result.loc['y', 'b'] == 3
+
+
+class TestGroupSum:
+    def test_group_sum(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [1, 2, 3]})
+        result = PandasGroup.group_sum(df, by=['a'])
+        assert result.loc['x', 'b'] == 3
+        assert result.loc['y', 'b'] == 3
+
+
+class TestGroupCount:
+    def test_group_count(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [1, 2, 3]})
+        result = PandasGroup.group_count(df, by=['a'])
+        assert result.loc['x', 'b'] == 2
+        assert result.loc['y', 'b'] == 1
+
+
+class TestGroupMin:
+    def test_group_min(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [2, 1, 3]})
+        result = PandasGroup.group_min(df, by=['a'])
+        assert result.loc['x', 'b'] == 1
+        assert result.loc['y', 'b'] == 3
+
+
+class TestGroupMax:
+    def test_group_max(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [2, 1, 3]})
+        result = PandasGroup.group_max(df, by=['a'])
+        assert result.loc['x', 'b'] == 2
+        assert result.loc['y', 'b'] == 3
+
+
+class TestGroupAgg:
+    def test_group_agg(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [2, 1, 3], 'c': [5, 6, 7]})
+        result = PandasGroup.group_agg(df, by=['a'], agg_func={'b': 'sum', 'c': 'mean'})
+        assert result.loc['x', 'b'] == 3
+        assert result.loc['x', 'c'] == 5.5
+        assert result.loc['y', 'b'] == 3
+        assert result.loc['y', 'c'] == 7
+
+
+class TestGroupStd:
+    def test_group_std(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [1, 2, 3]})
+        result = PandasGroup.group_std(df, by=['a'])
+        assert result.loc['x', 'b'] == 0.7071067811865476
+        assert pd.isna(result.loc['y', 'b'])
+
+
+class TestGroupNunique:
+    def test_group_nunique(self):
+        df = pd.DataFrame({'a': ['x', 'x', 'y'], 'b': [1, 2, 2]})
+        result = PandasGroup.group_nunique(df, by=['a'])
+        assert result.loc['x', 'b'] == 2
+        assert result.loc['y', 'b'] == 1
+
+    def test_group_nunique_all_unique(self):
+        df = pd.DataFrame({'a': ['x', 'y'], 'b': [1, 2]})
+        result = PandasGroup.group_nunique(df, by=['a'])
+        assert all(result['b'] == 1)
