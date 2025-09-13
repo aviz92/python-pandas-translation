@@ -1,13 +1,12 @@
-import logging
 import pandas as pd
 from typing import Optional, Union, Literal
 
-logger = logging.getLogger(__name__)
+from custom_python_logger import get_logger
 
 
 class PandasIO:
     def __init__(self):
-        self.logger = logging.getLogger(self.__class__.__name__)
+        self.logger = get_logger(self.__class__.__name__)
 
     @staticmethod
     def load_csv(

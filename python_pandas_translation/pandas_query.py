@@ -1,15 +1,13 @@
-import logging
 import pandas as pd
 from typing import Any, Literal
 
+from custom_python_logger import get_logger
 from pandas import Series
-
-logger = logging.getLogger(__name__)
 
 
 class PandasQuery:
     def __init__(self):
-        self.logger = logging.getLogger(self.__class__.__name__)
+        self.logger = get_logger(self.__class__.__name__)
 
     @staticmethod
     def filter_by_value(df: pd.DataFrame, column: str, value: Any, op: str = '==') -> Series:
